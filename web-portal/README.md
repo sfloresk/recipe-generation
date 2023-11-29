@@ -1,6 +1,8 @@
 # Recipe generation web portal
 
-A single page application to send images and recieve recipes. If accessed via a mobile phone, users can also take a picture directly instead of selecting one from the photo library
+A single page application to send images and receive recipes. If accessed via a mobile phone, users can also take a picture directly instead of selecting one from the photo library
+
+![Web application screenshot](../docs/recipe_generation_web_app.png)
 
 ## Recommended IDE Setup
 

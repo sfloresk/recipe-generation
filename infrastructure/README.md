@@ -4,7 +4,7 @@ This project contains source code and supporting files for a serverless applicat
 
 ## Deploy BLIP2
 
-The code assumes you have BLIP2 available as a sagemaker endpoint - you can follow the steps in [this notebook](https://github.com/aws-samples/amazon-sagemaker-genai-content-moderation/blob/main/blip2-sagemaker.ipynb) to deploy the model
+The code assumes you have BLIP2 available as a Sagemaker endpoint - you can follow the steps in [this notebook](https://github.com/aws-samples/amazon-sagemaker-genai-content-moderation/blob/main/blip2-sagemaker.ipynb) to deploy the model
 
 ## Deploy API Gateway, Lambda function and Cognito user pool
 
@@ -55,7 +55,7 @@ To delete the sample application that you created, use the AWS CLI. Assuming you
 aws cloudformation delete-stack --stack-name recipe-generation-infrastructure
 ```
 
-The cloudformation stack will not delete the BLIP2 deployment - you can remove it from the console going to Sagemaker -> Inference -> Endpoints -> Select the endpoint -> Actions -> Delete 
+The Cloudformation stack will not delete the BLIP2 deployment - you can remove it from the console going to Sagemaker -> Inference -> Endpoints -> Select the endpoint -> Actions -> Delete 
 
 
 ## Resources
