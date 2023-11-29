@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  recipe-generation-infrastructure
+
+  Sample SAM Template for recipe-generation-infrastructure
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+
+Resources:
+  GenerateRecipeWebClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref GenerateRecipeUserPool
+      ClientName: GenerateRecipeWebClient
+      ExplicitAuthFlows:
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_SRP_AUTH
+        
+  GenerateRecipeUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: GenerateRecipeUserPool
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+      Schema:
+        - AttributeDataType: String
+          Name: email
+          Required: false
+
+  GenerateRecipeAPI:
+      Type: AWS::Serverless::Api
+      Properties:
+        StageName: dev
+        Cors:
+          AllowMethods: "'POST'"
+          AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+          AllowOrigin: "'*'"
+        Auth:
+          Authorizers:
+            CognitoAuthorizer:
+              UserPoolArn: !GetAtt "GenerateRecipeUserPool.Arn"
+
+  GenerateRecipeFunction:
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./generateRecipeFunction
+      DockerTag: python3.11-v1
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Environment:
+        Variables:
+          BLIP2_SM_ENDPOINT_NAME: "CHANGE_ME" # For example endpoint-blip2-flan-t5-xl-2023-05-08-03-09-05-747
+      PackageType: Image
+      ImageUri: GenerateRecipeFunction:python3.11-v1
+      Architectures:
+        - x86_64
+      Events:
+        GenerateRecipe:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /recipes
+            Method: POST
+            RestApiId: !Ref GenerateRecipeAPI
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - bedrock:InvokeModel
+            Resource:
+              - "*"
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource:
+              - "*"  
+          - Effect: Allow
+            Action:
+              - sagemaker:InvokeEndpoint
+            Resource:
+              - "*"  
+         
+
+Outputs:
+  RecipeAPI:
+    Description: "API Gateway URL "
+    Value: !Sub "https://${!Ref GenerateRecipeAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/recipes/"

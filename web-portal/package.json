@@ -1,0 +1,23 @@
+{
+  "name": "recipe-web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@aws-amplify/auth": "^6.0.5",
+    "@aws-amplify/ui-vue": "^4.0.2",
+    "amazon-cognito-identity-js": "^6.3.7",
+    "aws-amplify": "^6.0.5",
+    "bootstrap": "^5.3.1",
+    "bootstrap-vue": "^2.23.1",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.4.6"
+  }
+}
