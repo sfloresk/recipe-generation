@@ -1,0 +1,3 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "recipe-generation-infrastructure"

@@ -171,7 +171,7 @@ export default {
           }
         }
         currentSession().then(idToken => {
-          fetch("https://CHANGE_ME/dev/recipes", {
+          fetch("CHANGE_ME/dev/recipes", {
             "method": "POST",
             "body": body,
             "headers": {
