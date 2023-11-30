@@ -171,7 +171,7 @@ export default {
           }
         }
         currentSession().then(idToken => {
-          fetch("https://h7uioqtyu0.execute-api.us-east-1.amazonaws.com/dev/recipes", {
+          fetch("https://CHANGE_ME/dev/recipes", {
             "method": "POST",
             "body": body,
             "headers": {
