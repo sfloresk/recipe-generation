@@ -96,5 +96,5 @@ Resources:
 
 Outputs:
   RecipeAPI:
-    Description: "API Gateway URL "
-    Value: !Sub "https://${!Ref GenerateRecipeAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/recipes/"
+    Description: "Generate recipe API invoke URL"
+    Value: !Sub "https://${GenerateRecipeAPI}.execute-api.${AWS::Region}.amazonaws.com/"
