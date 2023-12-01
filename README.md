@@ -5,9 +5,7 @@ This solution provides an example of how to create an end-to-end solution to inf
 ![Architecture diagram](./docs/architecture_diagram.png)
 
 ## Demo
-You can access a deployed instance of this solution at https://recipe-generation.com
-
-For simplicity, the demo has a pre-defined set of images for the user to choose instead of allowing uploads.
+You can access a deployed instance of this solution at https://recipe-generation.com - (For simplicity, the demo has a pre-defined set of images for the user to choose instead of allowing uploads, the the web portal code in this repo allows users to take pictures from their mobile phones)
 
 ## Infrastructure
 
