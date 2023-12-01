@@ -6,6 +6,10 @@ This project contains source code and supporting files for a serverless applicat
 
 The code assumes you have BLIP2 available as a Sagemaker endpoint - you can follow the steps in [this notebook](https://github.com/aws-samples/amazon-sagemaker-genai-content-moderation/blob/main/blip2-sagemaker.ipynb) to deploy the model
 
+## Enable access for Claude instant
+
+Follow the steps in [this guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to enable access of the model "Claude Instant" in us-east-1. The access status of "Claude Instant" should be equals to "Access granted"
+
 ## Deploy API Gateway, Lambda function and Cognito user pool
 
 The application uses several AWS resources, including a Lambda function, a Cognito user pool and an API Gateway. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.

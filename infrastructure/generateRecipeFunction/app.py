@@ -18,7 +18,7 @@ endpoint_name = os.getenv("BLIP2_SM_ENDPOINT_NAME")
 
 ## Init clients
 bedrock = boto3.client("bedrock-runtime", 'us-east-1')
-smr_client = boto3.client("sagemaker-runtime", 'us-east-1')
+smr_client = boto3.client("sagemaker-runtime")
 
 def run_inference(endpoint_name, inputs):
     response = smr_client.invoke_endpoint(
@@ -47,7 +47,7 @@ def lambda_handler(event, context):
         <ingredients>
         {image_ingredients_result}
         </ingredients>
-        Create a step by step recipe including the ingredients with the following constraints {request_json['constraints']}
+        Create a step by step recipe including the ingredients with the following constraints {request_json['constraints']}. If you don't know the answer, say "I don't know"
         
         Assistant:
         '''
@@ -60,7 +60,7 @@ def lambda_handler(event, context):
         <ingredients>
         {image_ingredients_result}
         </ingredients>
-        Create a step by step recipe including the ingredients
+        Create a step by step recipe including the ingredients. If you don't know the answer, say "I don't know"
         
         Assistant:
         '''
