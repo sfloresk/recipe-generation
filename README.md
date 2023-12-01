@@ -26,4 +26,6 @@ Example single page application built in Vue JS - it is integrated with Cognito 
 
 Detail instructions can be found [here](./web-portal/README.md)
 
+## Support
 
+Please open an issue for any questions or issues
